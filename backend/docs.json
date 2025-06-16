@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "TaskApi",
+    "description": "TaskApi"
+  },
+  "paths": {
+    "/api/tasks": {
+      "get": {
+        "summary": "Obtener Tareas",
+        "tags": ["tasks"],
+        "operationId": "get-api-tasks",
+        "description": "Este endpoint sirve para obtener todo el listado completo de tareas en la aplicación",
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "post": {
+        "summary": "Insertar Tareas",
+        "tags": ["tasks"],
+        "operationId": "post-api-tasks",
+        "description": "Este endpoint sirve para insertar una nueva tarea",
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description", "completed"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "completed": { "type": "boolean" }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "title": "Tarea de prueba",
+                    "description": "Esta es una tarea para testear si sirve esta onda que hice por primera vez sin IA",
+                    "completed": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Editar Tareas",
+        "tags": ["tasks"],
+        "operationId": "put-api-tasks",
+        "description": "Este endpoint sirve para editar una tarea en base a su id",
+        "parameters": [
+          {
+            "schema": { "type": "string" },
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "Este es el id de la tarea a modificar"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "completed": { "type": "boolean" }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "title": "string",
+                    "description": "string",
+                    "completed": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar Tareas",
+        "tags": ["tasks"],
+        "operationId": "delete-api-tasks",
+        "description": "Este endpoint sirve para eliminar una tarea en específico en base a su id",
+        "parameters": [
+          {
+            "schema": { "type": "string" },
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "Id de la tarea a eliminar"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "content": {} },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "https://virtserver.swaggerhub.com/alejandromurcia-697/TaskApi/1.0.0"
+    }
+  ]
+}
